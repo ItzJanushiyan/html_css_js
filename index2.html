@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Game</title>
+    <style>
+        /* Add your game CSS styles here */
+        /* For example, you can style the game canvas and bird character */
+        canvas {
+            border: 1px solid #000;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <script>
+        // Add your game JavaScript logic here
+        // You'll need to handle user input, game physics, and rendering
+        
+        // Example code:
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Bird character
+        const bird = {
+            x: 50,
+            y: canvas.height / 2,
+            radius: 20,
+            velocityY: 0,
+            gravity: 0.5,
+        };
+
+        function drawBird() {
+            ctx.beginPath();
+            ctx.arc(bird.x, bird.y, bird.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'blue';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function update() {
+            // Update bird's position, velocity, and other game logic here
+            bird.velocityY += bird.gravity;
+            bird.y += bird.velocityY;
+
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the bird
+            drawBird();
+
+            // Call the update function recursively
+            requestAnimationFrame(update);
+        }
+
+        // Start the game loop
+        update();
+    </script>
+</body>
+</html>
